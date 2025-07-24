@@ -30,3 +30,8 @@ button{
     border-radius: 1rem;
     background-color: #8de7ba;
 }
+
+button:hover{
+    cursor: pointer;
+    background-color: #6ed1a0;
+}
