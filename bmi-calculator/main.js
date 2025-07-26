@@ -1,24 +1,27 @@
 const toggleBtn = document.getElementById('theme-toggle');
-const rootElement = document.documentElement;
+const icon = toggleBtn.querySelector('i');
+const root = document.documentElement;
 
-// Check saved theme from localStorage
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  rootElement.setAttribute('data-theme', savedTheme);
-  toggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+// Set initial icon based on saved theme
+if (localStorage.getItem('theme') === 'dark') {
+  root.setAttribute('data-theme', 'dark');
+  icon.className = 'ri-sun-line';
+} else {
+  icon.className = 'ri-moon-line';
 }
 
-// Toggle theme on button click
 toggleBtn.addEventListener('click', () => {
-  const currentTheme = rootElement.getAttribute('data-theme');
-  if (currentTheme === 'dark') {
-    rootElement.removeAttribute('data-theme');
+  const currentTheme = root.getAttribute('data-theme');
+  const isDark = currentTheme === 'dark';
+
+  if (isDark) {
+    root.removeAttribute('data-theme');
     localStorage.setItem('theme', 'light');
-    toggleBtn.textContent = '🌙';
+    icon.className = 'ri-moon-line';
   } else {
-    rootElement.setAttribute('data-theme', 'dark');
+    root.setAttribute('data-theme', 'dark');
     localStorage.setItem('theme', 'dark');
-    toggleBtn.textContent = '☀️';
+    icon.className = 'ri-sun-line';
   }
 });
 

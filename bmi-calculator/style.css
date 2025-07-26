@@ -264,13 +264,13 @@ button:hover {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 2rem;
-  height: 2rem;
+  max-width: fit-content;
   padding: 0.25rem;
   background-color: transparent;
   border: 1px solid var(--input-border); 
   border-radius: 50%;
-  font-size: 1.25rem;
+  font-size: .96rem;
+  font-weight: normal;
   cursor: pointer;
   color: var(--text-color);
   display: flex;
