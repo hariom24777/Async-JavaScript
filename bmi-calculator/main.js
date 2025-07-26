@@ -1,3 +1,27 @@
+const toggleBtn = document.getElementById('theme-toggle');
+const rootElement = document.documentElement;
+
+// Check saved theme from localStorage
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  rootElement.setAttribute('data-theme', savedTheme);
+  toggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+}
+
+// Toggle theme on button click
+toggleBtn.addEventListener('click', () => {
+  const currentTheme = rootElement.getAttribute('data-theme');
+  if (currentTheme === 'dark') {
+    rootElement.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    toggleBtn.textContent = '🌙';
+  } else {
+    rootElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    toggleBtn.textContent = '☀️';
+  }
+});
+
 const form = document.querySelector("form");
 
 form.addEventListener("submit", (e) => {
@@ -14,12 +38,12 @@ form.addEventListener("submit", (e) => {
 
   // Check if inputs are valid numbers
   if (!isValidNumber(heightInput)) {
-    results.innerHTML = `<span style="color: red;">Please enter a valid numeric height (e.g., 175).</span>`;
+    results.innerHTML = `<span style="color: var(--error-color);">Please enter a valid numeric height (e.g., 175).</span>`;
     return;
   }
 
   if (!isValidNumber(weightInput)) {
-    results.innerHTML = `<span style="color: red;">Please enter a valid numeric weight (e.g., 70.5).</span>`;
+    results.innerHTML = `<span style="color: var(--error-color);">Please enter a valid numeric weight (e.g., 70.5).</span>`;
     return;
   }
 
@@ -28,9 +52,9 @@ form.addEventListener("submit", (e) => {
 
   // Range validation
   if (height <= 0 || height > 300) {
-    results.innerHTML = `<span style="color: red;">Height must be between 0 and 300 cm.</span>`;
+    results.innerHTML = `<span style="color: var(--error-color);">Height must be between 0 and 300 cm.</span>`;
   } else if (weight <= 0 || weight > 500) {
-    results.innerHTML = `<span style="color: red;">Weight must be between 0 and 500 kg.</span>`;
+    results.innerHTML = `<span style="color: var(--error-color);">Weight must be between 0 and 500 kg.</span>`;
   } else {
     const bmi = weight / (height / 100) ** 2;
     let category = "";
@@ -42,7 +66,7 @@ form.addEventListener("submit", (e) => {
 
     results.innerHTML = `
       <strong>Your BMI is ${bmi.toFixed(2)}</strong><br>
-      <span style="color: #444;">Category: ${category}</span>
+      <span >Category: ${category}</span>
     `;
   }
 });
